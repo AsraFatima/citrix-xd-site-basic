@@ -1,4 +1,4 @@
-﻿{
+{
   "handler": "Microsoft.Compute.MultiVm",
   "version": "0.0.1-preview",
   "parameters": {
@@ -6,7 +6,7 @@
       {
         "name": "adminUsername",
         "type": "Microsoft.Common.TextBox",
-        "label": "Administrators User name",
+        "label": "Administrators user name",
         "toolTip": "Specify the administrator user name for NetScaler, XenApp, and Active Directory. The user name cannot exceed 9 characters.",
         "defaultValue": "ctxadmin",
         "constraints": {
@@ -35,7 +35,7 @@
       {
         "name": "emailAddress",
         "type": "Microsoft.Common.TextBox",
-        "label": "Email Address",
+        "label": "Email address",
         "defaultValue": "",
         "toolTip": "Specify the email address that that will be used to request a public SSL certificate for NetScaler gateway from letsencrypt.org on your behalf. This will also be used to notify you when the solution template has deployed successfully.",
         "constraints": {
@@ -60,18 +60,18 @@
           {
             "name": "domainSettings",
             "type": "Microsoft.Common.Section",
-            "label": "Domain Settings",
+            "label": "Domain settings",
             "elements": [
               {
                 "name": "publicDnsName",
                 "type": "Microsoft.Network.PublicIpAddressCombo",
                 "label": {
-                  "publicIpAddress": "IP address Name",
-                  "domainNameLabel": "Domain name label for the deployment."
+                  "publicIpAddress": "IP address name",
+                  "domainNameLabel": "Domain name label"
                 },
                 "toolTip": {
                   "publicIpAddress": "Specify a name for the public IP address created as a part of the solution template deployment in the resource group.",
-                  "domainNameLabel": "Specifies the global DNS name for the entire deployment through which it can be reached."
+                  "domainNameLabel": "Specify the global DNS name for the entire deployment through which it can be reached."
                 },
                 "defaultValue": {
                   "publicIpAddressName": "publicIp"
@@ -96,7 +96,7 @@
                 "name": "vmSize",
                 "type": "Microsoft.Compute.SizeSelector",
                 "label": "Size",
-                "toolTip": "Specify the size of all the virtual machines in the deployment. A total of 9 virtual machines of the specified size will be created as a part of the solution template deployment.",
+                "toolTip": "Specify the size of all the virtual machines in the deployment. A total of 6 virtual machines of the specified size will be created as a part of the solution template deployment.",
                 "recommendedSizes": [
                   "Standard_A2",
                   "Standard_A3",
@@ -122,13 +122,13 @@
                   "offer": "WindowsServer",
                   "sku": "2012‐R2‐Datacenter"
                 },
-                "count": 9
+                "count": 6
               },
 
               {
                 "name": "vhdStorage",
                 "type": "Microsoft.Storage.StorageAccountSelector",
-                "label": "Storage Account",
+                "label": "Storage account",
                 "toolTip": "Specify the name of the storage account used for virtual machine disks. This has to be a unique name, up to 24 characters, all lowercase. The default storage type is Standard_LRS.",
                 "defaultValue": {
                   "type": "Standard_LRS"
