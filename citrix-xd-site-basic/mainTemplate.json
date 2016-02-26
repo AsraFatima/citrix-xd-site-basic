@@ -357,7 +357,7 @@
       "userImageUri": "[concat(variables('userImageLocation'), 'XD-ALL.vhd')]",
       "publisher": "citrix",
       "offer": "[concat('xenapp-server', parameters('imageQualifier'))]",
-      "sku": "baldeserver",
+      "sku": "bladeserver",
       "machineName": "XA-Controller",
       "fqdn": "[concat('XA-Controller', '.', parameters('domainName'))]",
       "machineSize": "[parameters('machineSize')]",
