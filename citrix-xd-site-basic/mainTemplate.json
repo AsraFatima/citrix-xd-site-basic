@@ -1013,9 +1013,6 @@
           "emailAddress": {
             "value": "[parameters('emailAddress')]"
           },
-          "certificateAuthority": {
-            "value": "[parameters('certificateAuthority')]"
-          },
           "acmeServer": {
             "value": "[parameters('acmeServer')]"
           },
