@@ -62,9 +62,10 @@
     },
     "imageQualifier": {
       "type": "string",
-      "defaultValue": "",
+      "defaultValue": "-preview",
       "allowedValues": [
-        ""
+        "",
+        "-preview"
       ],
       "metadata": {
         "description": "Specifies an additional qualifier to use for Marketplace image references. The value 'preview' is for images in staging, while the default value references production images."
