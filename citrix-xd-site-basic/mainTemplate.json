@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
 
@@ -57,7 +57,7 @@
         "User"
       ],
       "metadata": {
-        "description": "Specifies whether the template should deploy from the Azure Marketplace gallery or from user images in the storage account specified by 'vhdStorageAccount.'"
+        "description": "Specifies whether the template should deploy from the Azure Marketplace gallery or from user images in the storage account specified by 'vhdStorageAccount."
       }
     },
     "imageQualifier": {
@@ -170,7 +170,7 @@
 
     "encodedNetScalerLicense": {
       "type": "string",
-      "defaultValue": "77u/I0RPIE5PVCBFRElUIFRISVMgTElORSAtIFRoaXMgRmlsZSBpcyBpbiBVVEYtOCBmb3JtYXQuDQojDQpTRVJWRVIgdGhpc19ob3N0IEFOWQ0KVkVORE9SIENJVFJJWA0KVVNFX1NFUlZFUg0KSU5DUkVNRU5UIENOU19WNV9TRVJWRVIgQ0lUUklYIDIwMTYuMTIwMSAwMS1kZWMtMjAxNiAxIFwNCglWRU5ET1JfU1RSSU5HPTtMVD1SZXRhaWw7R1A9NzIwO0NMPVY1LFNUUk9ORyxFWFA7U0E9MDtPRFA9MCBcDQoJSVNTVUVEPTItZmViLTIwMDYgTk9USUNFPSJDaXRyaXggU3lzdGVtcywgSW5jLiIgU049VlBYRXhwIFwNCglTSUdOPSIxRjdFIDlGRTYgMzBDMCBGREYyIEQyNzYgN0Y1NCAxNTY0IDk3RDQgREJGQiA0QUI4IEM0REQgXA0KCTE2NDQgRUMxRSBFNTVEIDA2RUYgMTJBRiA0MzBDIDhBODQgMkExQSAxNTY3IDVBNkIgREM2QiBDN0RGIFwNCgk1RDc2IEQ5NzcgNjcxRCAwRDI3IDc2Q0MgNEI1MiBDMDYzIg0KSU5DUkVNRU5UIENOU19TU0VfU0VSVkVSIENJVFJJWCAyMDE2LjEyMDEgMDEtZGVjLTIwMTYgMSBcDQoJVkVORE9SX1NUUklORz07TFQ9UmV0YWlsO0dQPTcyMDtDTD1TU0U7U0E9MDtPRFA9MCBcDQoJSVNTVUVEPTItZmViLTIwMDYgTk9USUNFPSJDaXRyaXggU3lzdGVtcywgSW5jLiIgU049VlBYRXhwIFwNCglTSUdOPSIwMEEyIDM3QzEgMDlCNiA1MUYyIDZGNkEgQTI1OCBFRjg1IDE1NEMgMkVCRiBGODA0IEUwMEQgXA0KCUMzQkQgNURFMiBERTk0IDZEMEQgMTIxQSBFNUI2IEYzN0UgNjRDMCA0Q0M5IEZDRTcgMjA3NiA0OUFFIFwNCgkyODAxIDVFQzIgNjg3MiBBMTc3IEFDQ0QgMTBCMiAxNUI0Ig0KIw0KI1tFbmdsaXNoXQ0KI0NJVFJJWFRFUk0JRkVBVFVSRQkxLjAJQ05TX1Y1X1NFUlZFUiBFTglDaXRyaXggTmV0U2NhbGVyIFZQWCA1fFNlcnZlcg0KI0NJVFJJWFRFUk0JRkVBVFVSRQkyLjAJQ05TX1NTRV9TRVJWRVIJRU4JQ2l0cml4IE5ldFNjYWxlciBBcHBsaWNhdGlvbiBTd2l0Y2ggLSBTdGFuZGFyZCBFZGl0aW9ufFNlcnZlcg0KI0NJVFJJWFRFUk0JRkVBVFVSRQkyLjAJQ05TX1NFRV9TRVJWRVIJRU4JQ2l0cml4IE5ldFNjYWxlciBBcHBsaWNhdGlvbiBTd2l0Y2ggLSBFbnRlcnByaXNlIEVkaXRpb258U2VydmVyDQojQ0lUUklYVEVSTQlGRUFUVVJFCTEuMAlDTlNfU1BFX1NFUlZFUglFTglDaXRyaXggTmV0U2NhbGVyIEFwcGxpY2F0aW9uIFN3aXRjaCAtIFBsYXRpbnVtIEVkaXRpb258U2VydmVyDQo=",
+      "defaultValue": "",
       "metadata": {
         "description": "Specifies the NetScaler license to be used. Must be a Base64 encoded binary license file."
       }
@@ -181,6 +181,18 @@
       "defaultValue": "",
       "metadata": {
         "description": "Specifies the email address that that will be used to request a public SSL certificate for NetScaler gateway from letsencrypt.org on your behalf. This will also be used to notify you when the template has deployed successfully."
+      }
+    },
+    
+    "certificateAuthority": {
+      "type": "string",
+      "defaultValue": "Enterprise",
+      "allowedValues": [
+        "ACME",
+        "Enterprise"
+      ],
+      "metadata": {
+        "description": "Specifies whether an ACME CA or the internal Enterprise CA should be used for obtaining certificates."
       }
     },
 
@@ -345,7 +357,7 @@
       "userImageUri": "[concat(variables('userImageLocation'), 'XD-ALL.vhd')]",
       "publisher": "citrix",
       "offer": "[concat('xenapp-server', parameters('imageQualifier'))]",
-      "sku": "xenappserver",
+      "sku": "baldeserver",
       "machineName": "XA-Controller",
       "fqdn": "[concat('XA-Controller', '.', parameters('domainName'))]",
       "machineSize": "[parameters('machineSize')]",
@@ -504,7 +516,7 @@
       "userImageUri": "[concat(variables('userImageLocation'), 'XD-VDA.vhd')]",
       "publisher": "citrix",
       "offer": "[concat('xenapp-vda-rdsh', parameters('imageQualifier'))]",
-      "sku": "xenappvdardsh",
+      "sku": "bladevdardsh",
       "vdaPrefix": "XA-VDA",
       "machineSize": "[parameters('machineSize')]",
       "vdaCount": 1,
@@ -523,7 +535,7 @@
       "userImageUri": "[concat(variables('userImageLocation'), 'XD-VDI.vhd')]",
       "publisher": "citrix",
       "offer": "[concat('xenapp-vda-vdi', parameters('imageQualifier'))]",
-      "sku": "xenappvdavdi",
+      "sku": "bladevdavdi",
       "vdaPrefix": "XA-VDI",
       "machineSize": "[parameters('machineSize')]",
       "vdaCount": 1,
@@ -1012,6 +1024,9 @@
           },
           "emailAddress": {
             "value": "[parameters('emailAddress')]"
+          },
+          "certificateAuthority": {
+            "value": "[parameters('certificateAuthority')]"
           },
           "acmeServer": {
             "value": "[parameters('acmeServer')]"
