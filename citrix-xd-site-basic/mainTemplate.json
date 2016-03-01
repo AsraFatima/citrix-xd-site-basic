@@ -51,7 +51,7 @@
     },
     "imageType": {
       "type": "string",
-      "defaultValue": "Gallery",
+      "defaultValue": "User",
       "allowedValues": [
         "Gallery",
         "User"
@@ -62,10 +62,9 @@
     },
     "imageQualifier": {
       "type": "string",
-      "defaultValue": "-preview",
+      "defaultValue": "",
       "allowedValues": [
-        "",
-        "-preview"
+        ""
       ],
       "metadata": {
         "description": "Specifies an additional qualifier to use for Marketplace image references. The value 'preview' is for images in staging, while the default value references production images."
@@ -184,6 +183,19 @@
         "description": "Specifies the email address that that will be used to request a public SSL certificate for NetScaler gateway from letsencrypt.org on your behalf. This will also be used to notify you when the template has deployed successfully."
       }
     },
+    
+    "certificateAuthority": {
+      "type": "string",
+      "defaultValue": "Enterprise",
+      "allowedValues": [
+        "ACME",
+        "Enterprise"
+      ],
+      "metadata": {
+        "description": "Specifies whether an ACME CA or the internal Enterprise CA should be used for obtaining certificates."
+      }
+    },
+
     "acmeServer": {
       "type": "string",
       "defaultValue": "https://acme-staging.api.letsencrypt.org/",
@@ -401,7 +413,8 @@
     },
 
     "netScalerSettings": {
-      "templateUri": "[concat(variables('artifactsLocation'), 'creatingNetScaler.json')]",
+      "templateUri": "[concat(variables('artifactsLocation'), 'creatingNetScaler', parameters('imageType'), '.json')]",
+      "userImageUri": "[concat(variables('userImageLocation'), 'XD-NetScaler.vhd')]",
       "publisher": "sharefile",
       "offer": "netscaler-vpx-bring",
       "sku": "netscalervpxbyol",
@@ -864,6 +877,9 @@
           "vhdStorageAccount": {
             "value": "[parameters('vhdStorageAccount')]"
           },
+          "imageUri": {
+            "value": "[variables('netScalerSettings').userImageUri]"
+          },
           "machineSize": {
             "value": "[variables('netScalerSettings').machineSize]"
           },
@@ -1012,6 +1028,9 @@
           },
           "emailAddress": {
             "value": "[parameters('emailAddress')]"
+          },
+          "certificateAuthority": {
+            "value": "[parameters('certificateAuthority')]"
           },
           "acmeServer": {
             "value": "[parameters('acmeServer')]"
@@ -1374,6 +1393,7 @@
       }
     }
   ],
+  
   "outputs": {
     "netScalerGateway": {
       "type": "string",
@@ -1381,3 +1401,4 @@
     }
   }
 }
+
