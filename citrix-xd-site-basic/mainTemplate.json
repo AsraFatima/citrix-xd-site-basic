@@ -414,7 +414,7 @@
 
     "netScalerSettings": {
       "templateUri": "[concat(variables('artifactsLocation'), 'creatingNetscalerUser.json')]",
-      "userImageUri": "[concat(variables('userImageLocation'), 'XD-Netscaler.vhd')]",
+      "userImageUri": "[concat(variables('userImageLocation'), 'NSVPX_Azure_65.24.vhd')]",
       "publisher": "sharefile",
       "offer": "netscaler-vpx-bring",
       "sku": "netscalervpxbyol",
