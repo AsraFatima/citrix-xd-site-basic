@@ -413,7 +413,7 @@
     },
 
     "netScalerSettings": {
-      "templateUri": "[concat(variables('artifactsLocation'), 'creatingNetScalerUser.json')]",
+      "templateUri": "[concat(variables('artifactsLocation'), 'creatingNetscalerUser.json')]",
       "userImageUri": "[concat(variables('userImageLocation'), 'XD-NetScaler.vhd')]",
       "publisher": "sharefile",
       "offer": "netscaler-vpx-bring",
