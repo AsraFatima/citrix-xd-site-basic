@@ -184,18 +184,6 @@
       }
     },
     
-    "certificateAuthority": {
-      "type": "string",
-      "defaultValue": "Enterprise",
-      "allowedValues": [
-        "ACME",
-        "Enterprise"
-      ],
-      "metadata": {
-        "description": "Specifies whether an ACME CA or the internal Enterprise CA should be used for obtaining certificates."
-      }
-    },
-
     "acmeServer": {
       "type": "string",
       "defaultValue": "https://acme-staging.api.letsencrypt.org/",
@@ -1028,9 +1016,6 @@
           },
           "emailAddress": {
             "value": "[parameters('emailAddress')]"
-          },
-          "certificateAuthority": {
-            "value": "[parameters('certificateAuthority')]"
           },
           "acmeServer": {
             "value": "[parameters('acmeServer')]"
