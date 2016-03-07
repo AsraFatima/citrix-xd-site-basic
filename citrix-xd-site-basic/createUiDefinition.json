@@ -102,9 +102,7 @@
     "outputs": {
       "adminUsername": "[basics('adminUsername')]",
       "adminPassword": "[basics('adminPassword').password]",
-      "emailAddress": "[basics('emailAddress')]",      
-      "vhdStorageType": "[steps('infraConfig').virtualMachineSettings.vhdStorage.type]",
-      "vhdStorageGroup": "[steps('infraConfig').virtualMachineSettings.vhdStorage.resourceGroup]",      
+      "emailAddress": "[basics('emailAddress')]",
       "machineSize": "[steps('infraConfig').virtualMachineSettings.vmSize]"      
     }
   }
