@@ -31,7 +31,7 @@
         },
         "osPlatform": "Windows"
       },
-      
+
       {
         "name": "emailAddress",
         "type": "Microsoft.Common.TextBox",
@@ -55,37 +55,7 @@
           "postValidation": "Done"
         },
         "bladeTitle": "Infrastructure settings",
-        "elements": [
-
-          {
-            "name": "domainSettings",
-            "type": "Microsoft.Common.Section",
-            "label": "Domain settings",
-            "elements": [
-              {
-                "name": "publicDnsName",
-                "type": "Microsoft.Network.PublicIpAddressCombo",
-                "label": {
-                  "publicIpAddress": "IP address name",
-                  "domainNameLabel": "Domain name label"
-                },
-                "toolTip": {
-                  "publicIpAddress": "Specify a name for the public IP address created as a part of the solution template deployment in the resource group.",
-                  "domainNameLabel": "Specify the global DNS name for the entire deployment through which it can be reached."
-                },
-                "defaultValue": {
-                  "publicIpAddressName": "publicIp"
-                },
-                "options": {
-                  "hideNone": true,
-                  "hideDomainNameLabel": false
-                },
-                "constraints": {
-                  "required": true
-                }
-              }
-            ]
-          },
+        "elements": [      
 
           {
             "name": "virtualMachineSettings",
@@ -123,20 +93,6 @@
                   "sku": "2012‐R2‐Datacenter"
                 },
                 "count": 6
-              },
-
-              {
-                "name": "vhdStorage",
-                "type": "Microsoft.Storage.StorageAccountSelector",
-                "label": "Storage account",
-                "toolTip": "Specify the name of the storage account used for virtual machine disks. This has to be a unique name, up to 24 characters, all lowercase. The default storage type is Standard_LRS.",
-                "defaultValue": {
-                  "type": "Standard_LRS"
-                },
-                "constraints": {
-                  "allowedTypes": [ ],
-                  "excludedTypes": [ ]
-                }
               }
             ]
           }
@@ -146,16 +102,10 @@
     "outputs": {
       "adminUsername": "[basics('adminUsername')]",
       "adminPassword": "[basics('adminPassword').password]",
-      "emailAddress": "[basics('emailAddress')]",
-      "vhdStorageAccount": "[steps('infraConfig').virtualMachineSettings.vhdStorage.name]",
+      "emailAddress": "[basics('emailAddress')]",      
       "vhdStorageType": "[steps('infraConfig').virtualMachineSettings.vhdStorage.type]",
-      "vhdStorageGroup": "[steps('infraConfig').virtualMachineSettings.vhdStorage.resourceGroup]",
-      "vhdStorageNewOrExisting": "[steps('infraConfig').virtualMachineSettings.vhdStorage.newOrExisting]",
-      "machineSize": "[steps('infraConfig').virtualMachineSettings.vmSize]",
-      "publicDnsName": "[steps('infraConfig').domainSettings.publicDnsName.domainNameLabel]",
-      "publicIpGroup": "[steps('infraConfig').domainSettings.publicDnsName.resourceGroup]",
-      "publicIpName": "[steps('infraConfig').domainSettings.publicDnsName.name]",
-      "publicIpNewOrExisting": "[steps('infraConfig').domainSettings.publicDnsName.newOrExistingOrNone]"
+      "vhdStorageGroup": "[steps('infraConfig').virtualMachineSettings.vhdStorage.resourceGroup]",      
+      "machineSize": "[steps('infraConfig').virtualMachineSettings.vmSize]"      
     }
   }
 }
