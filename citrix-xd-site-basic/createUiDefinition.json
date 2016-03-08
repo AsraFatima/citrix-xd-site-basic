@@ -2,61 +2,65 @@
   "handler": "Microsoft.Compute.MultiVm",
   "version": "0.0.1-preview",
   "parameters": {
-    "basics": [
-      {
-        "name": "adminUsername",
-        "type": "Microsoft.Common.TextBox",
-        "label": "Administrators user name",
-        "toolTip": "Specify the administrator user name for NetScaler, XenApp, and Active Directory. The user name cannot exceed 9 characters.",
-        "defaultValue": "ctxadmin",
-        "constraints": {
-          "required": true,
-          "regex": "^[A-Za-z0-9]{1,9}$",
-          "validationMessage": "Usernames must be alphanumeric and between 1 and 9 characters in length."
-        }
-      },
-
-      {
-        "name": "adminPassword",
-        "type": "Microsoft.Compute.CredentialsCombo",
-        "label": {
-          "password": "Password",
-          "confirmPassword": "Confirm password"
-        },
-        "toolTip": {
-          "password": "Specify the administrator password for NetScaler, XenApp and Active Directory."
-        },
-        "constraints": {
-          "required": true
-        },
-        "osPlatform": "Windows"
-      },
-
-      {
-        "name": "emailAddress",
-        "type": "Microsoft.Common.TextBox",
-        "label": "Email address",
-        "defaultValue": "",
-        "toolTip": "Specify the email address that that will be used to request a public SSL certificate for NetScaler gateway from letsencrypt.org on your behalf. This will also be used to notify you when the solution template has deployed successfully.",
-        "constraints": {
-          "required": true,
-          "regex": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
-          "validationMessage": "Must be a valid email address."
-        }
-      }
+    "basics": [        
     ],
     "steps": [
-
-      {
+       {
         "name": "infraConfig",
-        "label": "Infrastructure settings",
+        "label": "Deployment settings",
         "subLabel": {
-          "preValidation": "Configure infrastructure settings",
+          "preValidation": "Configure deployment settings",
           "postValidation": "Done"
         },
         "bladeTitle": "Infrastructure settings",
-        "elements": [      
+        "elements": [
+          {
+            "name": "adminCredentials",
+            "type": "Microsoft.Common.Section",
+            "label": "Administrator Credentails",
+            "elements": [
+              {
+                "name": "adminUsername",
+                "type": "Microsoft.Common.TextBox",
+                "label": "Administrator's user name",
+                "toolTip": "Specify the administrator user name for NetScaler, XenApp, and Active Directory. The user name cannot exceed 9 characters.",
+                "defaultValue": "ctxadmin",
+                "constraints": {
+                  "required": true,
+                  "regex": "^[A-Za-z0-9]{1,9}$",
+                  "validationMessage": "Usernames must be alphanumeric and between 1 and 9 characters in length."
+                }
+              },
 
+              {
+                "name": "adminPassword",
+                "type": "Microsoft.Compute.CredentialsCombo",
+                "label": {
+                  "password": "Password",
+                  "confirmPassword": "Confirm password"
+                },
+                "toolTip": {
+                  "password": "Specify the administrator password for NetScaler, XenApp and Active Directory."
+                },
+                "constraints": {
+                  "required": true
+                },
+                "osPlatform": "Windows"
+              },
+              {
+                "name": "emailAddress",
+                "type": "Microsoft.Common.TextBox",
+                "label": "Email address",
+                "defaultValue": "",
+                "toolTip": "Specify the email address that that will be used to request a public SSL certificate for NetScaler gateway from letsencrypt.org on your behalf. This will also be used to notify you when the solution template has deployed successfully.",
+                "constraints": {
+                  "required": true,
+                  "regex": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+                  "validationMessage": "Must be a valid email address."
+                }
+              }
+            ]
+          },
           {
             "name": "virtualMachineSettings",
             "type": "Microsoft.Common.Section",
@@ -100,10 +104,11 @@
       }
     ],
     "outputs": {
-      "adminUsername": "[basics('adminUsername')]",
-      "adminPassword": "[basics('adminPassword').password]",
-      "emailAddress": "[basics('emailAddress')]",
-      "machineSize": "[steps('infraConfig').virtualMachineSettings.vmSize]"      
+      "emailAddress": "[basics('adminCredentials').emailAddress]",
+      "adminUsername": "[steps('adminCredentials').adminUsername.]",
+      "adminPassword": "[steps('adminCredentials').password]",
+      "machineSize": "[steps('infraConfig').virtualMachineSettings.vmSize]"
+
     }
   }
 }
