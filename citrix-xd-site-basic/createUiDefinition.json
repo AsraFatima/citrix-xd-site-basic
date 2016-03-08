@@ -15,7 +15,6 @@
           "validationMessage": "Usernames must be alphanumeric and between 1 and 9 characters in length."
         }
       },
-
       {
         "name": "adminPassword",
         "type": "Microsoft.Compute.CredentialsCombo",
@@ -30,9 +29,7 @@
           "required": true
         },
         "osPlatform": "Windows"
-      },
-
-
+      }
     ],
     "steps": [
 
@@ -82,19 +79,19 @@
                   "sku": "2012‐R2‐Datacenter"
                 },
                 "count": 6
-              },
-          {
-          "name": "emailAddress",
-          "type": "Microsoft.Common.TextBox",
-          "label": "Email address",
-          "defaultValue": "",
-          "toolTip": "Specify the email address that that will be used to request a public SSL certificate for NetScaler gateway from letsencrypt.org on your behalf. This will also be used to notify you when the solution template has deployed successfully.",
-          "constraints": {
-            "required": true,
-            "regex": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
-            "validationMessage": "Must be a valid email address."
-        }
-      }
+           },
+              {
+                  "name": "emailAddress",
+                  "type": "Microsoft.Common.TextBox",
+                  "label": "Email address",
+                  "defaultValue": "",
+                  "toolTip": "Specify the email address that that will be used to request a public SSL certificate for NetScaler gateway from letsencrypt.org on your behalf. This will also be used to notify you when the solution template has deployed successfully.",
+                  "constraints": {
+                    "required": true,
+                    "regex": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+                    "validationMessage": "Must be a valid email address."
+                }
+              }
             ]
           }
         ]
@@ -103,7 +100,7 @@
     "outputs": {
       "adminUsername": "[basics('adminUsername')]",
       "adminPassword": "[basics('adminPassword').password]",
-      "emailAddress": "[basics('emailAddress')]",
+      "emailAddress": "[steps('infraConfig').virtualMachineSettings.emailAddress]",
       "machineSize": "[steps('infraConfig').virtualMachineSettings.vmSize]"
     }
   }
