@@ -3,7 +3,34 @@
   "version": "0.0.1-preview",
   "parameters": {
     "basics": [
-    
+      {
+        "name": "adminUsername",
+        "type": "Microsoft.Common.TextBox",
+        "label": "Administrators user name",
+        "toolTip": "Specify the administrator user name for NetScaler, XenApp, and Active Directory. The user name cannot exceed 9 characters.",
+        "defaultValue": "ctxadmin",
+        "constraints": {
+          "required": true,
+          "regex": "^[A-Za-z0-9]{1,9}$",
+          "validationMessage": "Usernames must be alphanumeric and between 1 and 9 characters in length."
+        }
+      },
+
+      {
+        "name": "adminPassword",
+        "type": "Microsoft.Compute.CredentialsCombo",
+        "label": {
+          "password": "Password",
+          "confirmPassword": "Confirm password"
+        },
+        "toolTip": {
+          "password": "Specify the administrator password for NetScaler, XenApp and Active Directory."
+        },
+        "constraints": {
+          "required": true
+        },
+        "osPlatform": "Windows"
+      },
 
       {
         "name": "emailAddress",
@@ -28,42 +55,8 @@
           "postValidation": "Done"
         },
         "bladeTitle": "Infrastructure settings",
-        "elements": [
-          {
-            "name": "adminCredentials",
-            "type": "Microsoft.Common.Section",
-            "label": "Administrator Credentails",
-            "elements": [
-              {
-                "name": "adminUsername",
-                "type": "Microsoft.Common.TextBox",
-                "label": "Administrators user name",
-                "toolTip": "Specify the administrator user name for NetScaler, XenApp, and Active Directory. The user name cannot exceed 9 characters.",
-                "defaultValue": "ctxadmin",
-                "constraints": {
-                  "required": true,
-                  "regex": "^[A-Za-z0-9]{1,9}$",
-                  "validationMessage": "Usernames must be alphanumeric and between 1 and 9 characters in length."
-                }
-              },
+        "elements": [      
 
-              {
-                "name": "adminPassword",
-                "type": "Microsoft.Compute.CredentialsCombo",
-                "label": {
-                  "password": "Password",
-                  "confirmPassword": "Confirm password"
-                },
-                "toolTip": {
-                  "password": "Specify the administrator password for NetScaler, XenApp and Active Directory."
-                },
-                "constraints": {
-                  "required": true
-                },
-                "osPlatform": "Windows"
-              }
-            ]
-          },
           {
             "name": "virtualMachineSettings",
             "type": "Microsoft.Common.Section",
@@ -107,11 +100,10 @@
       }
     ],
     "outputs": {
+      "adminUsername": "[basics('adminUsername')]",
+      "adminPassword": "[basics('adminPassword').password]",
       "emailAddress": "[basics('emailAddress')]",
-      "adminUsername": "[steps('adminCredentials').adminUsername.]",
-      "adminPassword": "[steps('adminCredentials').password]",
-      "machineSize": "[steps('infraConfig').virtualMachineSettings.vmSize]"
-
+      "machineSize": "[steps('infraConfig').virtualMachineSettings.vmSize]"      
     }
   }
 }
